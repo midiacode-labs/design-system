@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+  <title>Midiacode Studio — UI Kit</title>
+  <link rel="stylesheet" href="studio.css">
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel" src="components.jsx"></script>
+  <script type="text/babel" src="screens.jsx"></script>
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+    let toastSeq = 0;
+
+    function App() {
+      const [view, setView]         = useState("library");   // library | detail | settings | qrcodes | analytics | audiences | integrations | help
+      const [openItem, setOpenItem] = useState(null);
+      const [drawer, setDrawer]     = useState(false);
+      const [tab, setTab]           = useState("all");
+      const [banner, setBanner]     = useState(true);
+      const [toasts, setToasts]     = useState([]);
+
+      const pushToast = (type, message) => {
+        const id = ++toastSeq;
+        setToasts(t => [...t, { id, type, message }]);
+        setTimeout(() => setToasts(t => t.filter(x => x.id !== id)), 3200);
+      };
+
+      const openDetail = (item) => { setOpenItem(item); setView("detail"); };
+      const backToLib  = () => { setOpenItem(null); setView("library"); };
+
+      const handleCreate = (data) => {
+        setDrawer(false);
+        pushToast("ongoing", `Creating "${data.title}"…`);
+        setTimeout(() => pushToast("pos", "Content created. Set routing rules to publish."), 900);
+      };
+
+      const handleNav = (id) => {
+        if (id === "settings") { setView("settings"); setOpenItem(null); }
+        else if (id === "library") { backToLib(); }
+        else {
+          setView(id);
+          setOpenItem(null);
+          pushToast("info", `${id.charAt(0).toUpperCase() + id.slice(1)} — preview not in this kit.`);
+        }
+      };
+
+      const activeNav = view === "detail" ? "library" : view;
+
+      return (
+        <div className="app">
+          <PrimarySidebar active={activeNav} onNavigate={handleNav} />
+          <div className="main-col">
+            {banner && (
+              <WarningBanner
+                ctaLabel="UPGRADE"
+                onCta={() => pushToast("info", "Opening billing…")}
+                onClose={() => setBanner(false)}
+              >
+                <b>Your trial ends in 3 days.</b> Upgrade to keep publishing.
+              </WarningBanner>
+            )}
+            <AppHeader
+              onCreate={() => setDrawer(true)}
+              onUpgrade={() => pushToast("info", "Opening billing…")}
+              onAvatarClick={() => pushToast("info", "Account menu — placeholder.")}
+            />
+            {view === "library"  && <ContentLibraryScreen onOpen={openDetail} onCreate={() => setDrawer(true)} tab={tab} setTab={setTab} />}
+            {view === "detail"   && openItem && <ContentDetailScreen item={openItem} onBack={backToLib} onPublish={() => { pushToast("pos", "Content published."); backToLib(); }} onArchive={() => { pushToast("warn", "Content archived."); backToLib(); }} />}
+            {view === "settings" && <SettingsScreen />}
+            {["qrcodes","analytics","audiences","integrations","help"].includes(view) && (
+              <div className="page" style={{ display:"flex", alignItems:"center", justifyContent:"center", flexDirection:"column", color:"rgba(0,0,0,.6)" }}>
+                <Icon name="construction" style={{ fontSize: 64, opacity: .3 }} />
+                <div style={{ marginTop: 12, fontSize: 18 }}>{view.charAt(0).toUpperCase() + view.slice(1)}</div>
+                <div style={{ fontSize: 13, marginTop: 4 }}>Not included in this UI kit — see the Studio README.</div>
+                <div style={{ marginTop: 16 }}><Button variant="outline" icon="arrow_back" onClick={() => setView("library")}>Back to library</Button></div>
+              </div>
+            )}
+          </div>
+          {drawer && <CreateContentDrawer onClose={() => setDrawer(false)} onCreate={handleCreate} />}
+          <ToastStack items={toasts} />
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>

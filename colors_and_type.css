@@ -1,0 +1,229 @@
+/**
+ * Midiacode Studio — Design Tokens
+ * Version: 4.30.0
+ * Framework: Quasar ^2.6.0 (Vue 3) — Material Design base
+ *
+ * Use these CSS variables anywhere in the design system, prototypes,
+ * decks and mocks. They mirror the brand config in `quasar.config.js`
+ * and the production `src/css/app.css`.
+ */
+
+/* ── Roboto webfont (Google Fonts CDN) ──────────────────────────
+   NOTE: Production uses the @quasar/extras "roboto-font" package
+   installed locally. We load the equivalent weights from Google
+   Fonts here for prototyping convenience.
+   FLAGGED: replace with the local "roboto-font" package files
+   under `fonts/roboto/` if exact metric parity is required.
+*/
+/* ── Brand fonts ─────────────────────────────────────────────
+   Open Sans (Light 300 + Bold 700) — provided by the user as
+   the new brand typeface (replaces Roboto in `font-family`).
+   Only two weights were provided; weights 400/500 fall back to
+   the closest installed face (400 → Light visually nearest at
+   text sizes; 500 → Bold via faux-bolding by the browser, which
+   we let happen rather than mapping it to 700 explicitly).
+   FLAG: if 400 and 500 weights become available later, add them
+   here and remove this note.
+*/
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('fonts/OpenSans-Light.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('fonts/OpenSans-Bold.ttf') format('truetype');
+}
+
+/* Material icon fonts.
+   We use the variable "Material Symbols Outlined" font as the single
+   source of truth for ALL icon classes — it has the full modern glyph
+   set (qr_code_2, grid_view, insights, bolt, etc) that legacy Material
+   Icons v145 does not. The font is loaded via a <link> tag in each
+   HTML file (Google Fonts CSS endpoint serves a UA-specific woff2 URL).
+
+   FILL=1 → filled (mimics legacy Material Icons)
+   FILL=0 → outlined (mimics Material Icons Outlined and modern Symbols)
+*/
+.material-icons,
+.material-icons-outlined,
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'liga';
+}
+.material-icons           { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+.material-icons-outlined  { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+
+:root {
+  /* ── BRAND COLOURS ──────────────────────────────────────── */
+  --color-primary:        #1976D2;   /* blue-8  — main brand */
+  --color-primary-dark:   #0D47A1;   /* blue-10 — sidebar bg */
+  --color-primary-light:  #42A5F5;   /* blue-4 */
+  --color-cta:            #FFD600;   /* yellow-14 — upgrade / create */
+  --color-cta-hover:      #FFC400;
+  --color-positive:       #21BA45;   /* success / published */
+  --color-negative:       #C10015;   /* error / delete */
+  --color-warning:        #F2C037;   /* warning / draft */
+  --color-info:           #31CCEC;   /* info */
+  --color-secondary:      #26A69A;
+  --color-accent:         #9C27B0;
+  --color-dark:           #1D1D1D;
+
+  /* ── SURFACES ───────────────────────────────────────────── */
+  --color-surface:        #FFFFFF;
+  --color-background:     #F5F5F5;   /* grey-2 — page bg */
+  --color-card-subtle:    rgba(239, 239, 239, 0.314);
+  --color-hover:          rgba(0, 0, 0, 0.04);
+  --color-active:         rgba(25, 118, 210, 0.08);
+
+  /* ── TEXT ───────────────────────────────────────────────── */
+  --color-text-primary:   rgba(0, 0, 0, 0.87);
+  --color-text-secondary: rgba(0, 0, 0, 0.60);
+  --color-text-disabled:  rgba(0, 0, 0, 0.38);
+  --color-text-on-dark:   #FFFFFF;
+  --color-divider:        rgba(0, 0, 0, 0.12);
+
+  /* ── BLUE SCALE (Material Blue) ─────────────────────────── */
+  --blue-1:  rgb(227, 242, 253);
+  --blue-2:  rgb(187, 222, 251);
+  --blue-3:  rgb(144, 202, 249);
+  --blue-4:  rgb(100, 181, 246);
+  --blue-5:  rgb(66,  165, 245);
+  --blue-6:  rgb(33,  150, 243);
+  --blue-7:  rgb(30,  136, 229);
+  --blue-8:  rgb(25,  118, 210);   /* = --color-primary */
+  --blue-9:  rgb(21,  101, 192);
+  --blue-10: rgb(13,   71, 161);   /* = --color-primary-dark */
+
+  /* ── GREY SCALE ─────────────────────────────────────────── */
+  --grey-1:  #FAFAFA;
+  --grey-2:  #F5F5F5;
+  --grey-3:  #EEEEEE;
+  --grey-4:  #E0E0E0;
+  --grey-5:  #BDBDBD;
+  --grey-6:  #9E9E9E;
+  --grey-7:  #757575;
+  --grey-8:  #616161;
+  --grey-9:  #424242;
+  --grey-10: #212121;
+
+  /* ── TYPOGRAPHY ─────────────────────────────────────────── */
+  --font-family: "Open Sans", -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono:   "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-size-base: 14px;
+  --line-height-base: 1.5;
+
+  /* Brand font ships with Light (300) and Bold (700) only.
+     The type scale below uses these two weights exclusively to
+     avoid browser faux-bolding for missing 400/500 faces. */
+  --fs-h1: 96px;   --fw-h1: 300; --lh-h1: 1.05;
+  --fs-h2: 60px;   --fw-h2: 300; --lh-h2: 1.10;
+  --fs-h3: 48px;   --fw-h3: 300; --lh-h3: 1.15;
+  --fs-h4: 34px;   --fw-h4: 300; --lh-h4: 1.20;
+  --fs-h5: 24px;   --fw-h5: 300; --lh-h5: 1.30;
+  --fs-h6: 20px;   --fw-h6: 700; --lh-h6: 1.40;
+  --fs-subtitle1: 16px; --fw-subtitle1: 300;
+  --fs-subtitle2: 14px; --fw-subtitle2: 700;
+  --fs-body1: 16px;     --fw-body1: 300;     --lh-body1: 1.50;
+  --fs-body2: 14px;     --fw-body2: 300;     --lh-body2: 1.43;
+  --fs-caption: 12px;   --fw-caption: 300;   --lh-caption: 1.33;
+  --fs-overline: 12px;  --fw-overline: 700;  --lh-overline: 2.00;
+
+  /* ── SPACING (Quasar cssAddon) ──────────────────────────── */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 48px;
+
+  /* ── BORDER RADIUS ──────────────────────────────────────── */
+  --radius-btn:     3px;
+  --radius-input:   4px;
+  --radius-table:   4px;
+  --radius-card:    10px;
+  --radius-avatar:  8px;
+  --radius-chip:    16px;
+  --radius-pill:    28px;
+  --radius-circle:  50%;
+
+  /* ── SHADOWS (Material Design 0/1/2/4) ──────────────────── */
+  --shadow-0: none;
+  --shadow-1: rgba(0,0,0,0.20) 0 1px 3px,
+              rgba(0,0,0,0.14) 0 1px 1px,
+              rgba(0,0,0,0.12) 0 2px 1px -1px;
+  --shadow-2: rgba(0,0,0,0.20) 0 1px 5px,
+              rgba(0,0,0,0.14) 0 2px 2px,
+              rgba(0,0,0,0.12) 0 3px 1px -2px;
+  --shadow-4: rgba(0,0,0,0.20) 0 2px 4px -1px,
+              rgba(0,0,0,0.14) 0 4px 5px,
+              rgba(0,0,0,0.12) 0 1px 10px;
+
+  /* ── TRANSITIONS ────────────────────────────────────────── */
+  --ease-material:   cubic-bezier(0.4, 0, 0.2, 1);
+  --transition:      0.30s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.36s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ── LAYOUT ─────────────────────────────────────────────── */
+  --sidebar-width:           60px;
+  --header-height:           51px;
+  --secondary-sidebar-width: 300px;
+  --warning-banner-height:   40px;
+}
+
+/* ── BASE ELEMENT STYLES ───────────────────────────────────── */
+html, body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  color: var(--color-text-primary);
+  background: var(--color-background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, .text-h3 { font-size: var(--fs-h3); font-weight: var(--fw-h3); line-height: var(--lh-h3); letter-spacing: 0; margin: 0; }
+h2, .text-h4 { font-size: var(--fs-h4); font-weight: var(--fw-h4); line-height: var(--lh-h4); margin: 0; }
+h3, .text-h5 { font-size: var(--fs-h5); font-weight: var(--fw-h5); line-height: var(--lh-h5); margin: 0; }
+h4, .text-h6 { font-size: var(--fs-h6); font-weight: var(--fw-h6); line-height: var(--lh-h6); margin: 0; }
+.text-subtitle1 { font-size: var(--fs-subtitle1); font-weight: var(--fw-subtitle1); }
+.text-subtitle2 { font-size: var(--fs-subtitle2); font-weight: var(--fw-subtitle2); }
+.text-body1    { font-size: var(--fs-body1); font-weight: var(--fw-body1); line-height: var(--lh-body1); }
+.text-body2    { font-size: var(--fs-body2); font-weight: var(--fw-body2); line-height: var(--lh-body2); }
+.text-caption  { font-size: var(--fs-caption); font-weight: var(--fw-caption); line-height: var(--lh-caption); color: var(--color-text-secondary); }
+.text-overline { font-size: var(--fs-overline); font-weight: var(--fw-overline); line-height: var(--lh-overline); letter-spacing: 0.08em; text-transform: uppercase; }
+
+.text-primary  { color: var(--color-primary); }
+.text-positive { color: var(--color-positive); }
+.text-negative { color: var(--color-negative); }
+.text-warning  { color: var(--color-warning); }
+.text-dark     { color: var(--color-dark); }
+.text-grey-7   { color: var(--grey-7); }
+
+.bg-primary       { background: var(--color-primary); color: #fff; }
+.bg-primary-dark  { background: var(--color-primary-dark); color: #fff; }
+.bg-cta           { background: var(--color-cta); color: var(--color-dark); }
+.bg-positive      { background: var(--color-positive); color: #fff; }
+.bg-warning       { background: var(--color-warning); color: var(--color-dark); }
+.bg-negative      { background: var(--color-negative); color: #fff; }
+.bg-surface       { background: var(--color-surface); }
+.bg-grey-2        { background: var(--color-background); }

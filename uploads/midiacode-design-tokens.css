@@ -1,0 +1,107 @@
+/**
+ * Midiacode Studio — Design Tokens
+ * Version: 4.30.0
+ * Framework: Quasar ^2.6.0 (Vue 3)
+ * File: src/css/app.css
+ */
+
+:root {
+  /* ── BRAND COLOURS ────────────────────────────────── */
+  --color-primary:        #1976D2;   /* blue-8  — main brand */
+  --color-primary-dark:   #0D47A1;   /* blue-10 — sidebar bg */
+  --color-primary-light:  #42A5F5;   /* blue-4  */
+  --color-cta:            #FFD600;   /* yellow-14 — upgrade/create CTA */
+  --color-positive:       #21BA45;   /* success / published */
+  --color-negative:       #C10015;   /* error / delete */
+  --color-warning:        #F2C037;   /* warning / draft */
+  --color-info:           #31CCEC;   /* info */
+  --color-secondary:      #26A69A;
+  --color-accent:         #9C27B0;
+  --color-dark:           #1D1D1D;
+
+  /* ── SURFACES ─────────────────────────────────────── */
+  --color-surface:        #FFFFFF;
+  --color-background:     #F5F5F5;   /* grey-2 — page bg */
+  --color-card-subtle:    rgba(239, 239, 239, 0.314);
+
+  /* ── TEXT ─────────────────────────────────────────── */
+  --color-text-primary:   rgba(0, 0, 0, 0.87);
+  --color-text-secondary: rgba(0, 0, 0, 0.6);
+  --color-text-disabled:  rgba(0, 0, 0, 0.38);
+  --color-text-on-dark:   #FFFFFF;
+  --color-divider:        rgba(0, 0, 0, 0.12);
+
+  /* ── BLUE SCALE ───────────────────────────────────── */
+  --blue-1: rgb(227, 242, 253);
+  --blue-2: rgb(187, 222, 251);
+  --blue-3: rgb(144, 202, 249);
+  --blue-4: rgb(100, 181, 246);
+  --blue-5: rgb(66,  165, 245);
+  --blue-6: rgb(33,  150, 243);
+  --blue-7: rgb(30,  136, 229);
+  --blue-8: rgb(25,  118, 210);  /* = --color-primary */
+  --blue-9: rgb(21,  101, 192);
+  --blue-10: rgb(13,  71, 161);  /* = --color-primary-dark */
+
+  /* ── TYPOGRAPHY ───────────────────────────────────── */
+  --font-family: "Roboto", -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-size-base: 14px;
+  --line-height-base: 1.5;
+
+  /* ── SPACING ──────────────────────────────────────── */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 48px;
+
+  /* ── BORDER RADIUS ────────────────────────────────── */
+  --radius-btn:     3px;   /* q-btn default */
+  --radius-input:   4px;   /* q-input outlined */
+  --radius-table:   4px;   /* q-table card */
+  --radius-card:    10px;  /* content & feature cards */
+  --radius-avatar:  8px;   /* workspace avatar square */
+  --radius-chip:    16px;  /* q-chip */
+  --radius-pill:    28px;  /* pill / rounded buttons */
+  --radius-circle:  50%;   /* q-btn round */
+
+  /* ── SHADOWS (Material Design) ────────────────────── */
+  --shadow-0: none;
+  --shadow-1: rgba(0,0,0,0.20) 0px 1px 3px,
+              rgba(0,0,0,0.14) 0px 1px 1px,
+              rgba(0,0,0,0.12) 0px 2px 1px -1px;
+  --shadow-2: rgba(0,0,0,0.20) 0px 1px 5px,
+              rgba(0,0,0,0.14) 0px 2px 2px,
+              rgba(0,0,0,0.12) 0px 3px 1px -2px;
+  --shadow-4: rgba(0,0,0,0.20) 0px 2px 4px -1px,
+              rgba(0,0,0,0.14) 0px 4px 5px,
+              rgba(0,0,0,0.12) 0px 1px 10px;
+
+  /* ── TRANSITIONS ──────────────────────────────────── */
+  --ease-material:   cubic-bezier(0.4, 0, 0.2, 1);
+  --transition:      0.30s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.36s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ── LAYOUT ───────────────────────────────────────── */
+  --sidebar-width:    60px;
+  --header-height:    51px;
+  --secondary-sidebar-width: 300px;
+}
+
+/* ── QUASAR BRAND CONFIG (quasar.config.js) ───────────
+framework: {
+  config: {
+    brand: {
+      primary:   '#1976D2',
+      secondary: '#26A69A',
+      accent:    '#9C27B0',
+      dark:      '#1D1D1D',
+      positive:  '#21BA45',
+      negative:  '#C10015',
+      info:      '#31CCEC',
+      warning:   '#F2C037'
+    }
+  }
+}
+──────────────────────────────────────────────────────── */

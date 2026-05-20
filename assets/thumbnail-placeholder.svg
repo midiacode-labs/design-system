@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160" width="240" height="160">
+  
+  <rect width="240" height="160" fill="#E0E0E0"></rect>
+  <g fill="#BDBDBD">
+    <rect x="100" y="60" width="40" height="40" rx="4"></rect>
+    <circle cx="120" cy="80" r="6" fill="#9E9E9E"></circle>
+  </g>
+  <text x="120" y="130" text-anchor="middle" font-family="Roboto, sans-serif" font-size="11" fill="rgba(0,0,0,0.6)" letter-spacing="0.5">NO THUMBNAIL</text>
+</svg>

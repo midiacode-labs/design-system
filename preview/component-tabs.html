@@ -1,0 +1,21 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"><link rel="stylesheet" href="_preview.css"><style>
+.card{padding:0;background:#fff}
+.tabs{display:flex;align-items:center;height:48px;padding:0 16px;border-bottom:1px solid var(--color-divider);gap:0}
+.tab{height:48px;padding:0 16px;display:flex;align-items:center;font-size:14px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--color-text-secondary);cursor:pointer;position:relative}
+.tab:hover{color:var(--color-text-primary)}
+.tab.active{color:var(--color-primary)}
+.tab.active::after{content:'';position:absolute;left:8px;right:8px;bottom:0;height:3px;background:var(--color-primary);border-radius:2px 2px 0 0}
+.count{margin-left:6px;background:rgba(0,0,0,.08);color:var(--color-text-secondary);font-size:11px;border-radius:10px;padding:1px 8px}
+.tab.active .count{background:rgba(25,118,210,.12);color:var(--color-primary)}
+.note{padding:14px 24px;color:var(--color-text-secondary);font-size:12px;line-height:1.6}
+</style></head><body>
+<div class="card">
+  <div class="tabs">
+    <div class="tab active">All<span class="count">128</span></div>
+    <div class="tab">Published<span class="count">94</span></div>
+    <div class="tab">Drafts<span class="count">22</span></div>
+    <div class="tab">Archived<span class="count">12</span></div>
+  </div>
+  <div class="note">Filter tabs · align="left" · indicator-color="primary" · active-color="primary". Counts use the same color logic as the tab.</div>
+</div>
+</body></html>
