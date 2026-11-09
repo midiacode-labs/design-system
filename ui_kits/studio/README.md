@@ -8,27 +8,23 @@ Open `index.html` directly — it loads React + Babel from a CDN and the design 
 
 ## Components (in `components.jsx`)
 
-- `PrimarySidebar` — 60 px navy sidebar with icon nav and active state
-- `AppHeader` — sticky 51 px top bar with yellow Create CTA, standout search, upgrade pill, avatar
-- `WarningBanner` — full-width yellow trial banner, dismissible
-- `FilterTabs` — All / Published / Drafts / Archived with counts
-- `ContentCard` — thumbnail + title + meta + status badge
-- `StatusBadge` — pill, three variants
-- `Button` — primary, CTA, flat, outline, danger
-- `Input` — outlined, focused, error
-- `Toast` — pos / neg / warn / info / ongoing
-- `Drawer` — Create-content modal slide-in
-- `SettingsSidebar` — secondary 300 px white sidebar for /settings
+Each mirrors a real Studio component (named in brackets).
 
-## Screens (selectable from the top nav)
+- `PrimarySidebar` — 60 px workspace switcher: logo, Home, search, workspace avatars, add [`Sidebar`]
+- `AppHeader` — white bordered header: yellow Create, standout search with filters, notifications, account menu [`WorkspaceContentsLayout`]
+- `WorkspaceHeader` — workspace name, settings, trial countdown, Upgrade, List / Gallery tabs [`WorkspaceContentsWrapper`]
+- `FilterTabs` — All available / Published / Draft / Archived, centred, with FontAwesome icons [`ContentDisplayModeWrapper`]
+- `ContentCard` — flat bordered card with cover, analytics count, metadata, status, short link, mini QR [`ContentGalleyItem`]
+- `StatusBadge` — green / red / grey-8 pill [`ContentStatusBadge`]
+- `UpgradePlanBadge`, `UpgradeButton` [`UpgradePlanBadge`, `UpgradeAccountButton`]
+- `ContentTypeCard`, `EmptyState` [`ContentTypeCard`, `WorkspaceNoContents`]
+- `Button`, `TextField`, `Toast` — generic recreations of `q-btn` (no-caps), outlined `q-input` and Quasar Notify
 
-1. **Content Library** (default) — the masonry-style grid of content cards.
-2. **Content Detail** — click any card to open: thumbnail + meta + scan stats panel.
-3. **Create Content** — yellow CTA opens a side-sheet drawer with type-picker → form.
-4. **Settings · Team & Permissions** — demonstrates the secondary sidebar layout.
+## Screens
 
-All screens are click-through; nothing persists. The point is high-fidelity component coverage.
+1. **Workspace contents** (default) — reviewed against Studio.
+2. **Content detail**, **Create content drawer**, **Settings** — illustrative only. They were generated before the codebase review and do not match Studio screens (Studio opens a content form page, picks the content type on a full page, and its settings menu has different items).
 
 ## Code notes
 
-These JSX components are **prototyping mirrors** of the production Vue components — they look the same but skip real logic. When porting back to Vue, structure each component as `defineComponent({ name, props, data, methods, computed })` with `<template>` SFC bodies, and use Quasar primitives (`q-btn`, `q-input`, `q-card`, `q-tabs`, `q-icon`, `q-toggle`, `q-chip`). See the root `README.md` → Code conventions.
+These JSX components are **prototyping mirrors** of the production Vue components — they look the same but skip real logic. When porting back to Vue, structure each component as `defineComponent({ name, props, setup })` with `<template>` SFC bodies, and use Quasar primitives (`q-btn`, `q-input`, `q-card`, `q-tabs`, `q-icon`, `q-toggle`, `q-chip`). See the root `README.md` → Code conventions.

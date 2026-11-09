@@ -1,23 +1,20 @@
 <!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"><link rel="stylesheet" href="_preview.css"><style>
-.card{padding:24px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
-.badge{display:inline-flex;align-items:center;height:24px;padding:0 12px;border-radius:16px;font-size:12px;font-weight:500;letter-spacing:.02em}
-.badge.pub{background:var(--color-positive);color:#fff}
-.badge.draft{background:var(--color-warning);color:var(--color-dark)}
-.badge.arch{background:var(--color-dark);color:#fff}
-.badge.info{background:var(--color-info);color:var(--color-dark)}
-.chip{display:inline-flex;align-items:center;height:32px;padding:0 12px;border-radius:16px;background:rgba(0,0,0,.08);font-size:13px}
-.chip .material-icons{font-family:'Material Symbols Outlined';font-style:normal;font-size:16px;margin-left:6px;cursor:pointer;color:rgba(0,0,0,.6)}
-.label{margin-right:8px}
+.card{padding:24px;display:grid;grid-template-columns:150px 1fr;gap:16px 12px;align-items:center}
+.group{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.badge{display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:1em;font-size:12px;line-height:1;color:#fff}
+.pub{background:#4CAF50}.dra{background:#F44336}.arc{background:#616161}
+.plan{display:inline-flex;align-items:center;padding:2px 6px;border-radius:4px;font-size:12px;line-height:12px;min-height:12px;background:var(--color-primary);color:#fff;opacity:.6;cursor:pointer}
+.chip{display:inline-flex;align-items:center;height:32px;padding:0 12px;border-radius:16px;background:var(--color-primary);color:#fff;font-size:14px;gap:6px}
+.chip .material-icons{font-size:18px}
+.chip .x{opacity:.6;cursor:pointer}
+.hint{font-size:12px;color:var(--color-text-secondary)}
 </style></head><body>
 <div class="card">
-  <span class="label">Status</span>
-  <span class="badge pub">Published</span>
-  <span class="badge draft">Draft</span>
-  <span class="badge arch">Archived</span>
-  <span class="badge info">Scheduled</span>
-  <span class="label" style="margin-left:24px">Tags (chips)</span>
-  <span class="chip">menu<span class="material-icons">close</span></span>
-  <span class="chip">spring 2026<span class="material-icons">close</span></span>
-  <span class="chip">en-US<span class="material-icons">close</span></span>
+  <span class="label">Content status</span>
+  <div class="group"><span class="badge pub">Published</span><span class="badge dra">Draft</span><span class="badge arc">Archived</span><span class="hint">q-badge rounded · 20px · green / red / grey-8</span></div>
+  <span class="label">Plan gate</span>
+  <div class="group"><span class="plan">Upgrade</span><span class="hint">UpgradePlanBadge · primary at 60% opacity · links to the upgrade page</span></div>
+  <span class="label">Content type filter</span>
+  <div class="group"><span class="chip"><span class="material-icons">link</span>Link<span class="material-icons x">cancel</span></span><span class="hint">q-chip removable · primary · white text</span></div>
 </div>
 </body></html>

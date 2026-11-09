@@ -1,4 +1,4 @@
-/* global React, PrimarySidebar, AppHeader, WarningBanner, FilterTabs, ContentCard, StatusBadge, Button, TextField, Icon, FeatureCard */
+/* global React, FilterTabs, ContentCard, ContentTypeCard, EmptyState, StatusBadge, Button, TextField, Icon */
 // Midiacode Studio — screens
 
 const { useState } = React;
@@ -12,59 +12,38 @@ const CONTENT = [
   { id: "5",  title: "Vintage Watches PDP",      type: "product",  icon: "shoppingmode",     iconSet: "symbols", author: "Will Park",   date: "Apr 7",   status: "Published", scans: 2104 },
   { id: "6",  title: "How to scan — onboarding", type: "video",    icon: "play_circle",      iconSet: "symbols", author: "Lara Chen",   date: "Apr 5",   status: "Published", scans: 944 },
   { id: "7",  title: "Loyalty signup page",      type: "page",     icon: "article",          iconSet: "symbols", author: "Marco Torres",date: "Apr 3",   status: "Draft",     scans: 0 },
-  { id: "8",  title: "Museum exhibit · Room B",  type: "ar",       icon: "museum",           iconSet: "symbols", author: "Aiko Mori",   date: "Mar 30",  status: "Scheduled", scans: 0 },
+  { id: "8",  title: "Museum exhibit · Room B",  type: "ar",       icon: "museum",           iconSet: "symbols", author: "Aiko Mori",   date: "Mar 30",  status: "Draft", scans: 0 },
   { id: "9",  title: "Sustainability report",    type: "page",     icon: "eco",              iconSet: "symbols", author: "Priya N.",    date: "Mar 28",  status: "Published", scans: 1820 },
   { id: "10", title: "Black Friday teaser",      type: "campaign", icon: "local_offer",      iconSet: "symbols", author: "Will Park",   date: "Mar 22",  status: "Archived",  scans: 38120 },
 ];
 
-// ── Library screen ────────────────────────────────────────
+// ── Workspace contents screen (WorkspaceContentsPage) ─────
 const ContentLibraryScreen = ({ onOpen, onCreate, tab, setTab }) => {
   const filtered = tab === "all" ? CONTENT : CONTENT.filter(c => c.status.toLowerCase().startsWith(tab));
-  const counts = {
-    all: CONTENT.length,
-    published: CONTENT.filter(c => c.status === "Published").length,
-    draft: CONTENT.filter(c => c.status === "Draft").length,
-    archived: CONTENT.filter(c => c.status === "Archived").length,
-  };
   return (
-    <div className="page">
-      <div className="page-title-row">
-        <div>
-          <h1 className="page-title">Content Library</h1>
-          <div className="page-subtitle">All workspaces · {CONTENT.length} items</div>
-        </div>
-        <Button variant="primary" icon="add" onClick={onCreate}>Create content</Button>
-      </div>
-
+    <div>
       <FilterTabs
         tabs={[
-          { id: "all",       label: "All",        count: counts.all },
-          { id: "published", label: "Published",  count: counts.published },
-          { id: "draft",     label: "Drafts",     count: counts.draft },
-          { id: "archived",  label: "Archived",   count: counts.archived },
+          { id: "all",       label: "All available", fa: "fa-solid fa-layer-group" },
+          { id: "published", label: "Published",     fa: "fa-solid fa-file-lines" },
+          { id: "draft",     label: "Draft",         fa: "far fa-file-alt" },
+          { id: "archived",  label: "Archived",      fa: "fa-regular fa-file" },
         ]}
         active={tab}
         onSelect={setTab}
       />
-
-      <div className="grid">
-        {filtered.map(item => <ContentCard key={item.id} item={item} onClick={onOpen} />)}
-      </div>
-
-      {filtered.length === 0 && (
-        <div style={{ textAlign: "center", padding: 64, color: "rgba(0,0,0,.6)" }}>
-          <Icon name="inbox" style={{ fontSize: 48, opacity: .3 }} />
-          <div style={{ marginTop: 12, fontSize: 16 }}>No content in this tab.</div>
+      <div className="page">
+        <h2 className="section-title">Contents</h2>
+        <div className="grid">
+          {filtered.map(item => <ContentCard key={item.id} item={item} onClick={onOpen} />)}
         </div>
-      )}
-
-      <div style={{ marginTop: 32 }}>
-        <div className="text-overline" style={{ marginBottom: 12, color: "rgba(0,0,0,.6)" }}>Learn the platform</div>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16 }}>
-          <FeatureCard icon="qr_code_2"   title="Dynamic QR codes"   description="Change where a code points without reprinting. Add audience, schedule and A/B rules." ctaLabel="Watch" />
-          <FeatureCard icon="insights"    title="Live scan analytics" description="See scans by city, device and campaign in real time. Filter to any time window."     ctaLabel="Watch" />
-          <FeatureCard icon="view_in_ar"  title="AR experiences"      description="Drop a glTF model behind any code and let visitors view it without an app install."   ctaLabel="Watch" />
-        </div>
+        {filtered.length === 0 && (
+          <EmptyState>
+            <p>You haven't created contents yet.</p>
+            <p style={{ marginBottom: 24 }}>You may start right away!</p>
+            <button className="btn btn-cta" onClick={onCreate}><Icon name="qr_code" />Create</button>
+          </EmptyState>
+        )}
       </div>
     </div>
   );

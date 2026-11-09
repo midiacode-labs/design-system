@@ -1,28 +1,26 @@
-<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"><link rel="stylesheet" href="_preview.css"><style>
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"><link rel="stylesheet" href="_preview.css"><style>
 .card{padding:0;background:#F5F5F5}
-.hdr{height:51px;background:#fff;display:flex;align-items:center;padding:0 16px;gap:12px;border-bottom:1px solid var(--color-divider)}
-.cta{height:32px;padding:0 16px;background:var(--color-cta);color:var(--color-dark);font-weight:500;font-size:13px;letter-spacing:.04em;text-transform:uppercase;border:0;border-radius:3px;display:flex;align-items:center;gap:6px;cursor:pointer}
-.search{flex:1;max-width:420px;background:rgba(0,0,0,.05);border-radius:4px;height:36px;display:flex;align-items:center;padding:0 12px;gap:8px}
-.search input{border:0;outline:0;background:transparent;flex:1;font-family:inherit;font-size:14px}
-.spacer{flex:1}
-.ico{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#9E9E9E;cursor:pointer}
-.ico:hover{background:rgba(0,0,0,.04);color:rgba(0,0,0,.7)}
-.avatar{width:32px;height:32px;border-radius:50%;background:#1976D2;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:500;font-size:13px;margin-left:4px}
-.upgrade{height:32px;padding:0 12px;background:var(--color-cta);color:var(--color-dark);font-weight:500;font-size:12px;text-transform:uppercase;border-radius:3px;display:inline-flex;align-items:center;gap:4px}
-.material-icons{font-family:'Material Symbols Outlined';font-style:normal;font-size:20px}
-.note{padding:16px 24px;color:var(--color-text-secondary);font-size:12px;line-height:1.6}
+.hdr{height:51px;background:#fff;display:grid;grid-template-columns:1fr 42% 1fr;align-items:center;padding:0 12px;border-bottom:1px solid var(--color-divider)}
+.cta{height:36px;padding:0 16px;background:var(--color-cta);color:var(--color-dark);font-family:inherit;font-weight:500;font-size:14px;border:0;border-radius:3px;display:inline-flex;align-items:center;gap:8px;cursor:pointer}
+.search{background:rgba(0,0,0,.05);border-radius:4px;height:40px;display:flex;align-items:center;padding:0 12px;gap:8px;color:rgba(0,0,0,.54)}
+.search span.lbl{flex:1;font-size:14px;color:rgba(0,0,0,.6)}
+.right{display:flex;justify-content:flex-end;align-items:center;gap:4px}
+.ico{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#9E9E9E;cursor:pointer}
+.acct{display:flex;align-items:center;gap:4px;padding:0 8px;height:42px;border-radius:28px;color:rgba(0,0,0,.87);cursor:pointer}
+.avatar{width:36px;height:36px;border-radius:50%;background:#1976D2;color:#EEEEEE;display:flex;align-items:center;justify-content:center;font-size:16px}
+.material-icons{font-size:24px}
+.note{padding:14px 24px;color:var(--color-text-secondary);font-size:12px;line-height:1.6}
 .note code{font-family:var(--font-mono);background:rgba(0,0,0,.05);padding:1px 6px;border-radius:3px;font-size:11px}
 </style></head><body>
 <div class="card">
   <div class="hdr">
-    <button class="cta"><span class="material-icons" style="font-size:18px">add</span>Create</button>
-    <div class="search"><span class="material-icons" style="color:rgba(0,0,0,.6)">search</span><input placeholder="Search content, tags, authors"></div>
-    <div class="spacer"></div>
-    <span class="upgrade"><span class="material-icons" style="font-size:14px">bolt</span>Upgrade</span>
-    <div class="ico"><span class="material-icons">filter_list</span></div>
-    <div class="ico"><span class="material-icons">notifications_none</span></div>
-    <div class="avatar">LC</div>
+    <div><button class="cta"><span class="material-icons">qr_code</span>Create</button></div>
+    <div class="search"><span class="material-icons">search</span><span class="lbl">Search</span><span class="material-icons">tune</span></div>
+    <div class="right">
+      <div class="ico"><span class="material-icons">notifications_none</span></div>
+      <div class="acct"><div class="avatar"><i class="fa-solid fa-user"></i></div><span class="material-icons">expand_more</span></div>
+    </div>
   </div>
-  <div class="note">Sticky · 51px · white. Left → right: yellow <code>Create</code> CTA, standout search, spacer, <code>Upgrade</code> pill, filter icon, notifications, user avatar.</div>
+  <div class="note">White <code>q-header bordered</code>, 51px. Left: yellow <code>Create</code> (<code>yellow-14</code>, dark text, <code>qr_code</code> icon, <code>no-caps</code>). Centre (<code>col-5</code>): dense <code>standout</code> search; the <code>tune</code> icon inside the field opens the filters menu (content type, serialized content). Right: notifications (<code>grey</code>, turns <code>red-6</code> with <code>notifications_active</code> when there are invites) and the account menu (<code>blue-8</code> avatar + <code>expand_more</code>). There is no Upgrade button in the header.</div>
 </div>
 </body></html>

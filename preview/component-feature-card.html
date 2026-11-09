@@ -1,25 +1,20 @@
 <!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"><link rel="stylesheet" href="_preview.css"><style>
-.card{padding:24px;background:#F5F5F5;display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.feature{background:rgba(239,239,239,.6);border-radius:10px;padding:20px;display:flex;flex-direction:column;gap:10px;border:1px solid rgba(0,0,0,.04)}
-.feature .ico{width:40px;height:40px;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center;color:var(--color-primary)}
-.feature .t{font-size:16px;font-weight:500}
-.feature .d{font-size:13px;color:var(--color-text-secondary);line-height:1.5}
-.feature .b{margin-top:auto;display:flex;gap:8px}
-.btn{font-family:var(--font-family);font-weight:500;font-size:13px;letter-spacing:.04em;text-transform:uppercase;border-radius:3px;padding:0 14px;height:32px;border:1px solid var(--color-primary);background:transparent;color:var(--color-primary);cursor:pointer}
-.material-icons{font-family:'Material Symbols Outlined';font-style:normal;font-size:22px}
+.card{padding:24px;background:#fff}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.ct{background:#F5F5F5;border-radius:15px;padding:24px;display:flex;flex-direction:column;max-height:105px;cursor:pointer;font-size:14px;white-space:nowrap}
+.ct .material-icons{align-self:flex-end;margin-bottom:8px;color:var(--color-primary);font-size:1.8em}
+h2{font-size:20px;font-weight:400;color:#424242;margin:0 0 24px}
+.note{padding:16px 0 0;color:var(--color-text-secondary);font-size:12px;line-height:1.6}
+.note code{font-family:var(--font-mono);background:rgba(0,0,0,.05);padding:1px 6px;border-radius:3px;font-size:11px}
 </style></head><body>
 <div class="card">
-  <div class="feature">
-    <div class="ico"><span class="material-icons">qr_code_2</span></div>
-    <div class="t">Dynamic QR codes</div>
-    <div class="d">Change where a code points without reprinting. Add audience, schedule and A/B rules.</div>
-    <div class="b"><button class="btn">Watch</button></div>
+  <h2>By type</h2>
+  <div class="grid4">
+    <div class="ct"><span class="material-icons">link</span>Link</div>
+    <div class="ct"><span class="material-icons">picture_as_pdf</span>Document</div>
+    <div class="ct"><span class="material-icons">smart_display</span>Video</div>
+    <div class="ct"><span class="material-icons">assignment</span>Form</div>
   </div>
-  <div class="feature">
-    <div class="ico"><span class="material-icons">insights</span></div>
-    <div class="t">Live scan analytics</div>
-    <div class="d">See scans by city, device and campaign in real time. Filter to any time window.</div>
-    <div class="b"><button class="btn">Watch</button></div>
-  </div>
+  <div class="note"><code>ContentTypeCard</code> on the content type selection page: <code>bg-grey-2</code>, <code>15px</code> radius, <code>q-pa-lg</code>, primary icon aligned right at <code>1.8em</code>, name below. No description and no button. Studio has no separate “feature card”.</div>
 </div>
 </body></html>

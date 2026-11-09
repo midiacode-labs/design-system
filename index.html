@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Midiacode Studio Design System — Preview index</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; }
+  nav { position: sticky; top: 0; align-self: start; height: 100vh; overflow-y: auto; background: var(--color-surface); border-right: 1px solid var(--color-divider); padding: 24px 16px; }
+  nav h1 { font-size: 16px; font-weight: 500; margin: 0 0 4px; }
+  nav p { font-size: 12px; color: var(--color-text-secondary); margin: 0 0 16px; }
+  nav h2 { font-size: 12px; font-weight: 500; color: var(--color-text-secondary); margin: 20px 0 6px; }
+  nav a { display: block; padding: 5px 8px; border-radius: 4px; font-size: 13px; color: var(--color-text-primary); text-decoration: none; }
+  nav a:hover { background: var(--color-hover); }
+  main { padding: 32px 40px 80px; min-width: 0; }
+  main > header h1 { font-size: 34px; font-weight: 400; margin: 0 0 8px; }
+  main > header p { max-width: 720px; margin: 0 0 16px; color: var(--color-text-secondary); }
+  .legend { display: flex; flex-wrap: wrap; gap: 16px; font-size: 13px; margin-bottom: 8px; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  section { margin-top: 40px; }
+  section > h2 { font-size: 24px; font-weight: 400; margin: 0 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--color-divider); }
+  article { margin-bottom: 32px; max-width: 760px; }
+  .head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 4px; }
+  .head h3 { font-size: 16px; font-weight: 500; margin: 0; }
+  .head a { margin-left: auto; font-size: 12px; color: var(--color-primary); text-decoration: none; }
+  .head a:hover { text-decoration: underline; }
+  .note { font-size: 13px; color: var(--color-text-secondary); margin: 0 0 10px; }
+  .chip { font-size: 11px; font-weight: 500; padding: 2px 10px; border-radius: 16px; white-space: nowrap; }
+  .aligned  { background: #E6F4EA; color: #1E6B34; }
+  .target   { background: var(--blue-1); color: var(--color-primary-dark); }
+  .diverges { background: #FDECEA; color: #8C1D18; }
+  .pending  { background: var(--grey-3); color: var(--grey-8); }
+  .frame { background: var(--color-surface); border: 1px solid var(--color-divider); border-radius: 8px; overflow: hidden; }
+  iframe { display: block; width: 700px; max-width: 100%; height: 260px; border: 0; margin: 0 auto; }
+  @media (max-width: 900px) { body { grid-template-columns: 1fr; } nav { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--color-divider); } main { padding: 24px 16px 64px; } }
+</style>
+</head>
+<body class="open-sans">
+<nav id="nav">
+  <h1>Design System</h1>
+  <p>Midiacode Studio · preview index</p>
+</nav>
+<main>
+  <header>
+    <h1>Preview index</h1>
+    <p>Every preview card in <code>preview/</code>, with its status against the real Studio codebase (<code>midiacode-studio</code> 4.37.1, reviewed 2026-11-09). “Aligned” cards were rewritten from the Studio source; they are static HTML recreations, not the Vue components themselves.</p>
+    <div class="legend">
+      <span><b class="chip aligned">Aligned</b> matches Studio</span>
+      <span><b class="chip target">Target</b> agreed rule, Studio still migrating</span>
+      <span><b class="chip diverges">Diverges</b> needs updating to match Studio</span>
+      <span><b class="chip pending">Not reviewed</b> not compared yet</span>
+    </div>
+  </header>
+  <div id="sections"></div>
+</main>
+<script>
+const LABEL = { aligned: 'Aligned', target: 'Target', diverges: 'Diverges', pending: 'Not reviewed' };
+const SECTIONS = [
+  ['Brand', [
+    ['brand-logos', 'Logos', 'pending', 'Logo assets were not compared with the Studio assets.'],
+  ]],
+  ['Colors', [
+    ['colors-primary', 'Primary', 'aligned', 'Same as the Quasar brand defaults Studio uses: primary #1976D2, blue-10 sidebar, yellow-14 CTA.'],
+    ['colors-semantic', 'Semantic', 'aligned', 'Positive, negative, warning and info match the Quasar defaults. Content status uses green / red / grey-8 instead (see Status badges).'],
+    ['colors-blue-scale', 'Blue scale', 'aligned', 'Quasar / Material blue palette.'],
+    ['colors-grey-scale', 'Grey scale', 'aligned', 'Quasar / Material grey palette. Smart Forms and Smart Analytics also use a separate hex neutral palette that is not documented here.'],
+    ['colors-text', 'Text', 'pending', 'Studio mostly uses the text-grey-7 / text-grey-8 classes; opacity-based text tokens were not compared.'],
+  ]],
+  ['Typography', [
+    ['type-specimen', 'Type specimen', 'target', 'Open Sans is the brand font. Studio still renders Roboto on most screens; Open Sans 300/400/500/700 are all available here; the Studio only registers Light and Bold, opt-in through .open-sans / .open-sans-bold.'],
+    ['type-display', 'Display', 'aligned', 'Title roles and sizes as used in Studio, shown in Open Sans (the font itself is still a target).'],
+    ['type-body', 'Body', 'target', 'Sizes and weights follow the Quasar scale (400 body, 500 subtitle2 and overline). Studio renders them in Roboto today; Open Sans needs Regular and Medium registered.'],
+  ]],
+  ['Foundations', [
+    ['spacing-tokens', 'Spacing', 'aligned', 'Quasar spacing scale (4 / 8 / 16 / 24 / 48).'],
+    ['radius-tokens', 'Radius', 'aligned', 'Radii actually used in Studio, including the workspace avatar shape and .default-border-radius.'],
+    ['shadow-tokens', 'Shadows', 'pending', 'Quasar shadow values; where Studio applies elevation was not compared in detail.'],
+    ['iconography', 'Iconography', 'aligned', 'Icon sets as used in Studio: filled Material by default, FontAwesome as a first-class set, Material Symbols on newer screens.'],
+  ]],
+  ['Components', [
+    ['component-buttons', 'Buttons', 'target', 'no-caps with sentence-case labels is the agreed rule; about a third of Studio buttons follow it today.'],
+    ['component-inputs', 'Inputs', 'aligned', 'Outlined is the Studio default for q-input and q-select; search uses standout.'],
+    ['component-status-badges', 'Status badges', 'aligned', 'ContentStatusBadge, UpgradePlanBadge and the content type filter chip.'],
+    ['component-tabs', 'Tabs', 'aligned', 'Status filter tabs and List / Gallery display tabs.'],
+    ['component-content-card', 'Content card', 'aligned', 'ContentGalleyItem: flat bordered card with cover, analytics count, metadata, status badge, short link and mini QR. Sample data is illustrative.'],
+    ['component-feature-card', 'Content type card', 'aligned', 'ContentTypeCard from the content type selection page. Replaces the old “feature card”, which does not exist in Studio.'],
+    ['component-header', 'Header', 'aligned', 'WorkspaceContentsLayout header: Create, standout search with filters, notifications, account menu.'],
+    ['component-sidebar', 'Sidebar', 'aligned', 'Workspace switcher, not a navigation menu.'],
+    ['component-toasts', 'Toasts', 'pending', 'Rule and types match useCustomNotification (5s timeout). Visual styling was not compared with Quasar Notify.'],
+    ['component-warning-banner', 'Trial notice and banners', 'aligned', 'Trial countdown with the Upgrade button, and inline q-banner colours. Replaces the full-width warning banner, which does not exist in Studio.'],
+  ]],
+];
+
+const nav = document.getElementById('nav');
+const root = document.getElementById('sections');
+for (const [section, items] of SECTIONS) {
+  const sec = document.createElement('section');
+  sec.innerHTML = `<h2>${section}</h2>`;
+  nav.insertAdjacentHTML('beforeend', `<h2>${section}</h2>`);
+  for (const [file, title, status, note] of items) {
+    nav.insertAdjacentHTML('beforeend', `<a href="#${file}">${title}</a>`);
+    const art = document.createElement('article');
+    art.id = file;
+    art.innerHTML = `
+      <div class="head"><h3>${title}</h3><span class="chip ${status}">${LABEL[status]}</span>
+        <a href="preview/${file}.html" target="_blank" rel="noopener">Open card</a></div>
+      <p class="note">${note}</p>
+      <div class="frame"><iframe src="preview/${file}.html" title="${title}" loading="lazy"></iframe></div>`;
+    const frame = art.querySelector('iframe');
+    frame.addEventListener('load', () => {
+      const fit = () => {
+        try { frame.style.height = frame.contentDocument.documentElement.scrollHeight + 'px'; } catch (e) { /* file:// — keep default height */ }
+      };
+      fit(); setTimeout(fit, 600);
+    });
+    sec.appendChild(art);
+  }
+  root.appendChild(sec);
+}
+nav.insertAdjacentHTML('beforeend', '<h2>UI kit</h2><a href="ui_kits/studio/index.html" target="_blank" rel="noopener">Studio UI kit</a>');
+</script>
+</body>
+</html>
