@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <title>Midiacode Studio — UI Kit</title>
   <link rel="stylesheet" href="studio.css">
   <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
@@ -22,7 +23,6 @@
       const [openItem, setOpenItem] = useState(null);
       const [drawer, setDrawer]     = useState(false);
       const [tab, setTab]           = useState("all");
-      const [banner, setBanner]     = useState(true);
       const [toasts, setToasts]     = useState([]);
 
       const pushToast = (type, message) => {
@@ -37,50 +37,43 @@
       const handleCreate = (data) => {
         setDrawer(false);
         pushToast("ongoing", `Creating "${data.title}"…`);
-        setTimeout(() => pushToast("pos", "Content created. Set routing rules to publish."), 900);
+        setTimeout(() => pushToast("pos", "Content created."), 900);
       };
 
-      const handleNav = (id) => {
-        if (id === "settings") { setView("settings"); setOpenItem(null); }
-        else if (id === "library") { backToLib(); }
-        else {
-          setView(id);
-          setOpenItem(null);
-          pushToast("info", `${id.charAt(0).toUpperCase() + id.slice(1)} — preview not in this kit.`);
-        }
-      };
-
-      const activeNav = view === "detail" ? "library" : view;
+      const [workspace, setWorkspace] = useState("acme");
+      const [mode, setMode]           = useState("gallery");
+      const current = WORKSPACES.find(w => w.id === workspace);
 
       return (
         <div className="app">
-          <PrimarySidebar active={activeNav} onNavigate={handleNav} />
+          {view !== "settings" && (
+            <PrimarySidebar
+              current={workspace}
+              onSelect={(id) => { setWorkspace(id); backToLib(); }}
+              onHome={backToLib}
+              onSearch={() => pushToast("info", "Workspace search dialog: not in this kit.")}
+              onAdd={() => pushToast("info", "Create workspace: not in this kit.")}
+            />
+          )}
           <div className="main-col">
-            {banner && (
-              <WarningBanner
-                ctaLabel="UPGRADE"
-                onCta={() => pushToast("info", "Opening billing…")}
-                onClose={() => setBanner(false)}
-              >
-                <b>Your trial ends in 3 days.</b> Upgrade to keep publishing.
-              </WarningBanner>
-            )}
             <AppHeader
               onCreate={() => setDrawer(true)}
-              onUpgrade={() => pushToast("info", "Opening billing…")}
-              onAvatarClick={() => pushToast("info", "Account menu — placeholder.")}
+              onFilters={() => pushToast("info", "Search filters menu: not in this kit.")}
+              onAvatarClick={() => setView(view === "settings" ? "library" : "settings")}
             />
+            {view === "library" && (
+              <WorkspaceHeader
+                name={current.name}
+                trial="3 days 4 hours and 12 minutes"
+                mode={mode}
+                onMode={setMode}
+                onSettings={() => setView("settings")}
+                onUpgrade={() => pushToast("info", "Opening the upgrade page.")}
+              />
+            )}
             {view === "library"  && <ContentLibraryScreen onOpen={openDetail} onCreate={() => setDrawer(true)} tab={tab} setTab={setTab} />}
             {view === "detail"   && openItem && <ContentDetailScreen item={openItem} onBack={backToLib} onPublish={() => { pushToast("pos", "Content published."); backToLib(); }} onArchive={() => { pushToast("warn", "Content archived."); backToLib(); }} />}
             {view === "settings" && <SettingsScreen />}
-            {["qrcodes","analytics","audiences","integrations","help"].includes(view) && (
-              <div className="page" style={{ display:"flex", alignItems:"center", justifyContent:"center", flexDirection:"column", color:"rgba(0,0,0,.6)" }}>
-                <Icon name="construction" style={{ fontSize: 64, opacity: .3 }} />
-                <div style={{ marginTop: 12, fontSize: 18 }}>{view.charAt(0).toUpperCase() + view.slice(1)}</div>
-                <div style={{ fontSize: 13, marginTop: 4 }}>Not included in this UI kit — see the Studio README.</div>
-                <div style={{ marginTop: 16 }}><Button variant="outline" icon="arrow_back" onClick={() => setView("library")}>Back to library</Button></div>
-              </div>
-            )}
           </div>
           {drawer && <CreateContentDrawer onClose={() => setDrawer(false)} onCreate={handleCreate} />}
           <ToastStack items={toasts} />

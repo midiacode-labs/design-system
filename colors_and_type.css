@@ -1,44 +1,31 @@
 /**
  * Midiacode Studio — Design Tokens
- * Version: 4.30.0
+ * Reviewed against midiacode-studio 4.37.1
  * Framework: Quasar ^2.6.0 (Vue 3) — Material Design base
  *
- * Use these CSS variables anywhere in the design system, prototypes,
- * decks and mocks. They mirror the brand config in `quasar.config.js`
- * and the production `src/css/app.css`.
+ * Use these CSS variables in the design system, prototypes, decks
+ * and mocks. They do NOT exist in the Studio codebase: production
+ * has no CSS custom properties and leaves the Quasar `brand` config
+ * empty, so it styles with Quasar's default palette classes and
+ * props (`color="primary"`, `bg-grey-2`, `text-grey-7`, …). The
+ * values below are those Quasar defaults, named for convenience.
  */
 
-/* ── Roboto webfont (Google Fonts CDN) ──────────────────────────
-   NOTE: Production uses the @quasar/extras "roboto-font" package
-   installed locally. We load the equivalent weights from Google
-   Fonts here for prototyping convenience.
-   FLAGGED: replace with the local "roboto-font" package files
-   under `fonts/roboto/` if exact metric parity is required.
-*/
 /* ── Brand fonts ─────────────────────────────────────────────
-   Open Sans (Light 300 + Bold 700) — provided by the user as
-   the new brand typeface (replaces Roboto in `font-family`).
-   Only two weights were provided; weights 400/500 fall back to
-   the closest installed face (400 → Light visually nearest at
-   text sizes; 500 → Bold via faux-bolding by the browser, which
-   we let happen rather than mapping it to 700 explicitly).
-   FLAG: if 400 and 500 weights become available later, add them
-   here and remove this note.
+   Open Sans — brand typeface. Four static weights in fonts/:
+   Light 300, Regular 400, Medium 500, Bold 700 (SIL OFL, see
+   fonts/OFL.txt). 400 and 500 are the weights Quasar's type scale
+   uses for body copy, subtitles, h3–h6, tabs and buttons, so they
+   are required to match the Studio's rendering.
+   Production today registers only Light and Bold as two families,
+   `open-sans` and `open-sans-bold` (`.open-sans` / `.open-sans-bold`
+   utility classes below). To migrate the Studio to Open Sans it
+   must also register Regular and Medium (see README → Fonts).
 */
-@font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src: url('fonts/OpenSans-Light.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('fonts/OpenSans-Bold.ttf') format('truetype');
-}
+@font-face { font-family: 'Open Sans'; font-style: normal; font-weight: 300; font-display: swap; src: url('fonts/OpenSans-Light.ttf') format('truetype'); }
+@font-face { font-family: 'Open Sans'; font-style: normal; font-weight: 400; font-display: swap; src: url('fonts/OpenSans-Regular.ttf') format('truetype'); }
+@font-face { font-family: 'Open Sans'; font-style: normal; font-weight: 500; font-display: swap; src: url('fonts/OpenSans-Medium.ttf') format('truetype'); }
+@font-face { font-family: 'Open Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url('fonts/OpenSans-Bold.ttf') format('truetype'); }
 
 /* Material icon fonts.
    We use the variable "Material Symbols Outlined" font as the single
@@ -80,18 +67,24 @@
   --color-primary-light:  #42A5F5;   /* blue-4 */
   --color-cta:            #FFD600;   /* yellow-14 — upgrade / create */
   --color-cta-hover:      #FFC400;
-  --color-positive:       #21BA45;   /* success / published */
+  --color-positive:       #21BA45;   /* success */
   --color-negative:       #C10015;   /* error / delete */
-  --color-warning:        #F2C037;   /* warning / draft */
+  --color-warning:        #F2C037;   /* warning */
   --color-info:           #31CCEC;   /* info */
   --color-secondary:      #26A69A;
   --color-accent:         #9C27B0;
   --color-dark:           #1D1D1D;
+  --color-link:           #0277BD;   /* a, a:visited (app.css) */
+
+  /* ── CONTENT STATUS (ContentStatusBadge) ────────────────── */
+  --color-status-published: #4CAF50; /* Quasar green */
+  --color-status-draft:     #F44336; /* Quasar red */
+  --color-status-archived:  #616161; /* Quasar grey-8 */
 
   /* ── SURFACES ───────────────────────────────────────────── */
   --color-surface:        #FFFFFF;
   --color-background:     #F5F5F5;   /* grey-2 — page bg */
-  --color-card-subtle:    rgba(239, 239, 239, 0.314);
+  --color-card-subtle:    #F5F5F5;   /* bg-grey-2 — content type card */
   --color-hover:          rgba(0, 0, 0, 0.04);
   --color-active:         rgba(25, 118, 210, 0.08);
 
@@ -137,16 +130,16 @@
      avoid browser faux-bolding for missing 400/500 faces. */
   --fs-h1: 96px;   --fw-h1: 300; --lh-h1: 1.05;
   --fs-h2: 60px;   --fw-h2: 300; --lh-h2: 1.10;
-  --fs-h3: 48px;   --fw-h3: 300; --lh-h3: 1.15;
-  --fs-h4: 34px;   --fw-h4: 300; --lh-h4: 1.20;
-  --fs-h5: 24px;   --fw-h5: 300; --lh-h5: 1.30;
-  --fs-h6: 20px;   --fw-h6: 700; --lh-h6: 1.40;
-  --fs-subtitle1: 16px; --fw-subtitle1: 300;
-  --fs-subtitle2: 14px; --fw-subtitle2: 700;
-  --fs-body1: 16px;     --fw-body1: 300;     --lh-body1: 1.50;
-  --fs-body2: 14px;     --fw-body2: 300;     --lh-body2: 1.43;
-  --fs-caption: 12px;   --fw-caption: 300;   --lh-caption: 1.33;
-  --fs-overline: 12px;  --fw-overline: 700;  --lh-overline: 2.00;
+  --fs-h3: 48px;   --fw-h3: 400; --lh-h3: 1.15;
+  --fs-h4: 34px;   --fw-h4: 400; --lh-h4: 1.20;
+  --fs-h5: 24px;   --fw-h5: 400; --lh-h5: 1.30;
+  --fs-h6: 20px;   --fw-h6: 500; --lh-h6: 1.40;
+  --fs-subtitle1: 16px; --fw-subtitle1: 400;
+  --fs-subtitle2: 14px; --fw-subtitle2: 500;
+  --fs-body1: 16px;     --fw-body1: 400;     --lh-body1: 1.50;
+  --fs-body2: 14px;     --fw-body2: 400;     --lh-body2: 1.43;
+  --fs-caption: 12px;   --fw-caption: 400;   --lh-caption: 1.33;
+  --fs-overline: 12px;  --fw-overline: 500;  --lh-overline: 2.00;
 
   /* ── SPACING (Quasar cssAddon) ──────────────────────────── */
   --space-xs: 4px;
@@ -159,8 +152,11 @@
   --radius-btn:     3px;
   --radius-input:   4px;
   --radius-table:   4px;
-  --radius-card:    10px;
-  --radius-avatar:  8px;
+  --radius-card:    4px;              /* q-card default (flat bordered) */
+  --radius-surface: 8px;              /* most common custom radius */
+  --radius-section: 10px;             /* section cards in newer screens */
+  --radius-default: 15px;             /* .default-border-radius, content type card */
+  --radius-avatar:  20% 8% 20% 20%;   /* workspace avatar */
   --radius-chip:    16px;
   --radius-pill:    28px;
   --radius-circle:  50%;
@@ -187,7 +183,6 @@
   --sidebar-width:           60px;
   --header-height:           51px;
   --secondary-sidebar-width: 300px;
-  --warning-banner-height:   40px;
 }
 
 /* ── BASE ELEMENT STYLES ───────────────────────────────────── */
@@ -211,6 +206,10 @@ h4, .text-h6 { font-size: var(--fs-h6); font-weight: var(--fw-h6); line-height: 
 .text-body2    { font-size: var(--fs-body2); font-weight: var(--fw-body2); line-height: var(--lh-body2); }
 .text-caption  { font-size: var(--fs-caption); font-weight: var(--fw-caption); line-height: var(--lh-caption); color: var(--color-text-secondary); }
 .text-overline { font-size: var(--fs-overline); font-weight: var(--fw-overline); line-height: var(--lh-overline); letter-spacing: 0.08em; text-transform: uppercase; }
+
+/* Production utility classes (src/css/app.css) */
+.open-sans      { font-family: var(--font-family); font-weight: 300; }
+.open-sans-bold { font-family: var(--font-family); font-weight: 700; }
 
 .text-primary  { color: var(--color-primary); }
 .text-positive { color: var(--color-positive); }
